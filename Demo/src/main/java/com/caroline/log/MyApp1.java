@@ -15,9 +15,9 @@ public class MyApp1 {
         Foo.doIt();
         logger.info("after");
 
-        try {
+            try {
             int i = 10 / 0;
-        }catch (Exception e) {
+        } catch (Exception e) {
             logger.error("errorTest", e);
         }
     }

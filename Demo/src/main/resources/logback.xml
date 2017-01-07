@@ -1,11 +1,125 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<configuration>-->
+    <!--<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">-->
+        <!--<encoder>-->
+            <!--<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>-->
+        <!--</encoder>-->
+    <!--</appender>-->
+    <!--<root level="DEBUG">-->
+        <!--<appender-ref ref="STDOUT" />-->
+    <!--</root>-->
+<!--</configuration>-->
+
+<!-- scan 是否定期扫描xml文件, scanPeriod是说扫描周期是30秒-->
+<!--<configuration scan="true" scanPeriod="30 seconds" debug="false" packagingData="true">-->
+    <!--&lt;!&ndash;项目名称&ndash;&gt;-->
+    <!--<contextName>myApp1 contextName</contextName>-->
+    <!--&lt;!&ndash;属性&ndash;&gt;-->
+    <!--<property name="USER_HOME" value="./log"/>-->
+
+    <!--&lt;!&ndash; Insert the current time formatted as "yyyyMMdd'T'HHmmss" under-->
+        <!--the key "bySecond" into the logger context.&ndash;&gt;-->
+    <!--<timestamp key="bySecond" datePattern="yyyyMMdd" timeReference="contextBirth"/>-->
+
+    <!--&lt;!&ndash; appender很重要,一个配置文件会有多个appender &ndash;&gt;-->
+    <!--&lt;!&ndash; ConsoleAppender 意思是从console中打印出来&ndash;&gt;-->
+    <!--<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">-->
+        <!--&lt;!&ndash; 过滤器, 一个appender可以有多个 &ndash;&gt;-->
+        <!--&lt;!&ndash; 阈值过滤,就是log行为级别过滤, debug及debug以上的信息会被打印出来&ndash;&gt;-->
+        <!--<filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+            <!--<level>debug</level>-->
+        <!--</filter>-->
+        <!--&lt;!&ndash; encoders are assigned the type-->
+        <!--ch.qos.logback.classic.encoder.PatternLayoutEncoder by default&ndash;&gt;-->
+        <!--&lt;!&ndash; encoder 编码规则 &ndash;&gt;-->
+        <!--<encoder>-->
+            <!--&lt;!&ndash;<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %</pattern>&ndash;&gt;-->
+            <!--&lt;!&ndash;<pattern>%d %contextName %msg%n</pattern>&ndash;&gt;-->
+            <!--&lt;!&ndash; pattern 模式 %d时间 %thread线程名 %level行为级别 %loggerlogger名称 %method方法名称 %message调用方法的入参消息 &ndash;&gt;-->
+            <!--<pattern>%-4d [%thread] %highlight%-5level %cyan%logger.%-10method - %message%n</pattern>-->
+        <!--</encoder>-->
+    <!--</appender>-->
+
+    <!--&lt;!&ndash; FileAppender 输出到文件 &ndash;&gt;-->
+    <!--<appender name="FILE" class="ch.qos.logback.core.FileAppender">-->
+        <!--<file>${USER_HOME}/myAll1log-${bySecond}.log</file>-->
+    <!--</appender>-->
+<!--</configuration>-->
+
+<!--<configuration>-->
+    <!-- 打印到控制台 -->
+    <!--<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">-->
+        <!--<encoder>-->
+            <!--<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} -%msg%n</pattern>-->
+        <!--</encoder>-->
+    <!--</appender>-->
+
+
+    <!--设置某一个包或者具体的一个类的日志打印级别-->
+    <!--&lt;!&ndash; logback为java中的包&ndash;&gt;-->
+    <!--<logger name="com.caroline.log" />-->
+    <!--&lt;!&ndash; logback.LogbackDemo: 类的全路径&ndash;&gt;-->
+    <!--<logger name="com.caroline.log.LogbackDemo" level="INFO" additivity="true">-->
+    <!--<appender-ref ref="STDOUT"/>-->
+    <!--</logger>-->
+
+    <!-- 打印日志到某个文件 -->
+    <!--<appender name="FILE" class="ch.qos.logback.core.FileAppender">-->
+        <!--<file>testFile.log</file>-->
+        <!--<append>true</append>-->
+        <!--<encoder>-->
+            <!--<pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>-->
+        <!--</encoder>-->
+    <!--</appender>-->
+
+    <!--&lt;!&ndash; 每天生成一个日志文件, 保存30天的日志文件 &ndash;&gt;-->
+    <!--<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+            <!--<fileNamePattern>logFile.%d{yyyy-MM-dd}.log</fileNamePattern>-->
+            <!--<maxHistory>30</maxHistory>-->
+        <!--</rollingPolicy>-->
+
+        <!--<encoder>-->
+            <!--<pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n </pattern>-->
+        <!--</encoder>-->
+    <!--</appender>-->
+
+    <!--&lt;!&ndash; 按照固定窗口模式生成日志文件,当文件大于20MB,时,生成新的日志文件。-->
+         <!--窗口大小是1到3,当存了3个归档文件后,将覆盖最早的日志&ndash;&gt;-->
+    <!--<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+        <!--<file>test.log</file>-->
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">-->
+            <!--<fileNamePattern>tests.%i.log.zip</fileNamePattern>-->
+            <!--<minIndex>1</minIndex>-->
+            <!--<maxIndex>3</maxIndex>-->
+        <!--</rollingPolicy>-->
+
+        <!--<triggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">-->
+            <!--<maxFileSize>5MB</maxFileSize>-->
+        <!--</triggeringPolicy>-->
+        <!--<encoder>-->
+            <!--<pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n </pattern>-->
+        <!--</encoder>-->
+    <!--</appender>-->
+<!--</configuration>-->
+
+<!-- 将过滤器的日志级别配置为INFO, 所有INFO级别的日志交给 appender处理,
+     非INFO级别的日志,被过滤掉-->
+<configuraion>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>
+                %-4relative [%thread] %-5level %logger{30} -%msg%n
+            </pattern>
         </encoder>
     </appender>
     <root level="DEBUG">
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE"/>
     </root>
-</configuration>
+</configuraion>
