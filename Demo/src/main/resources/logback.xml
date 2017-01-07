@@ -108,27 +108,40 @@
 
  <!--将过滤器的日志级别配置为INFO, 所有INFO级别的日志交给 appender处理,-->
      <!--非INFO级别的日志,被过滤掉-->
-<configuraion>
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>DEBUG</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
-        </filter>
+<!--<configuraion>-->
+    <!--<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">-->
+        <!--<filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+            <!--<level>DEBUG</level>-->
+            <!--<onMatch>ACCEPT</onMatch>-->
+            <!--<onMismatch>DENY</onMismatch>-->
+        <!--</filter>-->
 
+        <!--<encoder>-->
+            <!--<pattern>-->
+                <!--%-4relative [%thread] %-5level %logger{30} -%msg%n-->
+            <!--</pattern>-->
+        <!--</encoder>-->
+    <!--</appender>-->
+    <!--<root level="DEBUG">-->
+        <!--<appender-ref ref="STDOUT"/>-->
+    <!--</root>-->
+<!--</configuraion>-->
+
+<!-- ThresholdFilter 临界值过滤器,过滤掉低于指定临界值的日志。当日志级别等于或高于临界值时,
+    过滤器返回NEUTRAL,当日志级别低于临界值时,日志会被拒绝。-->
+<!-- 例如:过滤掉所有低于INFO级别的日志-->
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
         <encoder>
             <pattern>
-                %-4relative [%thread] %-5level %logger{30} -%msg%n
+                %-4relative [%thread] %-5level %logger{30} - %msg%n
             </pattern>
         </encoder>
     </appender>
-    <root level="DEBUG">
-        <appender-ref ref="STDOUT"/>
+    <root level="DEBUG" >
+        <appender-ref ref="CONSOLE" />
     </root>
-</configuraion>
-
-<!--<configuration>-->
-    <!--<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">-->
-        <!---->
-    <!--</appender>-->
-<!--</configuration>-->
+</configuration>
