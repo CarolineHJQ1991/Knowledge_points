@@ -101,14 +101,17 @@
             <!--<pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n </pattern>-->
         <!--</encoder>-->
     <!--</appender>-->
+    <!--<root level="DEBUG">-->
+        <!--<appender-ref ref="FILE"/>-->
+    <!--</root>-->
 <!--</configuration>-->
 
-<!-- 将过滤器的日志级别配置为INFO, 所有INFO级别的日志交给 appender处理,
-     非INFO级别的日志,被过滤掉-->
+ <!--将过滤器的日志级别配置为INFO, 所有INFO级别的日志交给 appender处理,-->
+     <!--非INFO级别的日志,被过滤掉-->
 <configuraion>
-    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>INFO</level>
+            <level>DEBUG</level>
             <onMatch>ACCEPT</onMatch>
             <onMismatch>DENY</onMismatch>
         </filter>
@@ -120,6 +123,12 @@
         </encoder>
     </appender>
     <root level="DEBUG">
-        <appender-ref ref="FILE"/>
+        <appender-ref ref="STDOUT"/>
     </root>
 </configuraion>
+
+<!--<configuration>-->
+    <!--<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">-->
+        <!---->
+    <!--</appender>-->
+<!--</configuration>-->
